@@ -76,8 +76,8 @@ class BacklinksClient(object):
 
         """
         ping_record, created = OutboundBacklink.objects.get_or_create(target_url=target_url,
-                                                                      source_object=source_object)
-        ping_record.status = OutboundBacklink.SUCCESSFUL_STATUS
+                                                                      source_url=source_url,
+                                                                      defaults={'status': OutboundBacklink.SUCCESSFUL_STATUS})
         ping_record.protocol = protocol
         ping_record.source_url = source_url
         ping_record.target_url = target_url
@@ -96,8 +96,8 @@ class BacklinksClient(object):
         """
 
         ping_record, created = OutboundBacklink.objects.get_or_create(target_url=target_url,
-                                                                      source_object=source_object)
-        ping_record.status = OutboundBacklink.UNSUCCESSFUL_STATUS
+                                                                      source_url=source_url,
+                                                                      defaults={'status': OutboundBacklink.UNSUCCESSFUL_STATUS})
         ping_record.protocol = protocol
         ping_record.source_url = source_url
         ping_record.target_url = target_url
@@ -150,10 +150,11 @@ class BacklinksClient(object):
                                               source_object=source_object,
                                               title=title,
                                               excerpt=contextual_excerpt)
-            except BacklinkClientError:
+            except BacklinkClientError, e:
                 self.register_unsuccessful_ping(target_url,
                                                 source_url,
                                                 client_name,
                                                 source_object=source_object,
                                                 title=title,
                                                 excerpt=contextual_excerpt)
+

@@ -44,7 +44,7 @@ class InboundBacklink(models.Model):
 
 
     def __unicode__(self):
-        return _('Inbound backlink from %s to %s') % (self.source_uri, self.target_object or self.target_uri)
+        return _('Inbound backlink from %s to %s') % (self.source_url, self.target_object or self.target_url)
 
 
 class OutboundBacklink(models.Model):
@@ -77,7 +77,8 @@ class OutboundBacklink(models.Model):
     source_object = generic.GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
-        return _('Outbound backlink from %s to %s') % (self.source_object or self.source_uri, self.target_uri)
+        return _('Outbound backlink from %s to %s') % (self.source_object or self.source_url, self.target_url)
 
     def increment_attempts(self):
         self.num_attempts = self.num_attempts + 1
+

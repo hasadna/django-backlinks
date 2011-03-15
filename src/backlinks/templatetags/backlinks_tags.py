@@ -1,6 +1,6 @@
 from django.template import Library, Node, Variable, TemplateSyntaxError
 from django.contrib.contenttypes.models import ContentType
-from backlinks.models import InboundLinkback
+from backlinks.models import InboundBacklink
 
 register = Library()
 
@@ -13,7 +13,7 @@ class BacklinkListObject(Node):
         try:
             target_object = self.target_object.resolve(context)
             content_type = ContentType.objects.get_for_model(target_object)
-            pings = InboundLinkback.objects.approved().filter(content_type=content_type, \
+            pings = InboundBacklink.objects.approved().filter(content_type=content_type, \
                             object_id=target_object.id)
             context[self.template_var_name] = pings
         except:
@@ -36,3 +36,4 @@ def do_ping_list(parser, token):
 
 
 register.tag('backlinks_for_model', do_ping_list)
+
