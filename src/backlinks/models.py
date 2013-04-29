@@ -22,7 +22,7 @@ class InboundBacklink(models.Model):
     )
 
     source_url = models.URLField(_('linking resource identifier'))
-    target_url = models.URLField(_('linked resource identifier'), verify_exists=False)
+    target_url = models.URLField(_('linked resource identifier'))
     received = models.DateTimeField(_('received'), default=datetime.datetime.now)
     title = models.CharField(_('title of linking resource'), max_length=1024, blank=True)
     excerpt = models.TextField(_('excerpt from linking resource'), blank=True)
