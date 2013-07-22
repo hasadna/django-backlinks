@@ -27,7 +27,7 @@ def mock_pingback_server(request):
     if not request.method == 'POST':
         return HttpResponseNotAllowed(['POST'])
     response = HttpResponse(mimetype='text/xml')
-    response.write(dispatcher._marshaled_dispatch(request.raw_post_data))
+    response.write(dispatcher._marshaled_dispatch(request.body))
     response['Content-Length'] = str(len(response.content))
     return response
 
