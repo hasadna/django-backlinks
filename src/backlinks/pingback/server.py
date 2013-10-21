@@ -129,7 +129,7 @@ class PingbackServer(BacklinksServer):
 
         """
         try:
-            params, method = xmlrpclib.loads(request.raw_post_data)
+            params, method = xmlrpclib.loads(request.body)
             if method != 'pingback.ping':
                 raise Exception('Method "%s" not supported' % method)
             source_uri, target_uri = params
