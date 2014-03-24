@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from django.core.urlresolvers import resolve, Resolver404, \
     reverse, NoReverseMatch
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.functional import update_wrapper
+from functools import update_wrapper
 
 from backlinks.server import BacklinksServer
 from backlinks.exceptions import BacklinkServerError, BacklinkTargetDoesNotExist, \
